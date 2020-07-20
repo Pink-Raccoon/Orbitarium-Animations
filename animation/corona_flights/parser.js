@@ -1,0 +1,3 @@
+function parseCoronaData(){
+    alert('hoi');
+}

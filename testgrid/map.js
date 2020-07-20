@@ -10,6 +10,13 @@ function initMap() {
   });
   generateLatitudeLines();
   generateLongitudeLines();
+
+  var marker = new google.maps.Marker({
+    position: {lat: 85, lng: 10},
+    map: map,
+    title: 'Hello World!'
+  });
+
   
 }
 
