@@ -16,3 +16,9 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->get('/testinsert', function () {
+    DB::table('countries')->insert(
+        ['name' => 'testcountry', 'path' => 'asdfasdf']
+    );
+});
