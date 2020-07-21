@@ -6,5 +6,8 @@ function initMap() {
         center: { lat: 0, lng: 0 },
         zoom: 3.485
     });
+    generateCountryBorders();
+    //var polygon = drawPolyLine("asd");
+    //polygon.setMap(map);   
     readCoronaData();
 }

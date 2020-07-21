@@ -5,7 +5,7 @@ function readCoronaData() {
         .catch(error => console.log("error:" + error));
 }
 
-function parseCoronaData(data) {
+function parseToObject(data) {
     var parseOptions =
     {
         delimiter: ",",	// auto-detect
@@ -18,7 +18,7 @@ function parseCoronaData(data) {
         comments: false,
         step: undefined,
         complete: function(results, file) {
-            console.log("Parsing complete:", results, file);
+            //console.log("Parsing complete:", results, file);
         },
         error: undefined,
         download: false,
@@ -34,4 +34,6 @@ function parseCoronaData(data) {
     }
     Papa.parse(data, parseOptions)
 }
+
+
 
