@@ -8,66 +8,33 @@ function initMap() {
     center: { lat: 0, lng: 0 },
     zoom: 3.485
   });
-  generateLatitudeLines();
-  generateLongitudeLines();
-
-  var marker = new google.maps.Marker({
-    position: {lat: 85, lng: 10},
-    map: map,
-    title: 'Hello World!'
-  });
-
+  getData();
   
 }
 
-function generateLatitudeLines(){
-    for (i = -90; i < 100; i+=10) {
-        var point1 = new google.maps.LatLng({lat: i, lng: -180});
-        var point2 = new google.maps.LatLng({lat: i, lng: 0});
-        var point3 = new google.maps.LatLng({lat: i, lng: 180});
-        var color;
-        var weight;
-        if(i == 0){
-            color = '#FF0000';
-            weight = 5;
-        } else {
-            color = '#0000FF';
-            weight = 2;
+function getData(){
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4){
+            paintSwitzerland(xhr.responseText);
         }
-        var latLine = new google.maps.Polyline({
-            path: [point1, point2, point3],
-            geodesic: false,
-            strokeColor: color,
-            strokeOpacity: 1.0,
-            strokeWeight: weight
-        });
-        latitudes.push(latLine);
-        latLine.setMap(map);
-    } 
+    };;
+    xhr.open('GET', 'http://localhost:50330/api/animation');
+    xhr.send()
 }
 
-function generateLongitudeLines(){
-    for (i = -180; i < 190; i+=20) {
-        var point1 = new google.maps.LatLng({lat: -90, lng: i});
-        var point2 = new google.maps.LatLng({lat: 0, lng: i});
-        var point3 = new google.maps.LatLng({lat: 90, lng: i});
-        var color;
-        var weight;
-        if(i == 0){
-            color = '#FF0000';
-            weight = 5;
-        } else {
-            color = '#0000FF';
-            weight = 2;
-        }
-        var longLine = new google.maps.Polyline({
-            path: [point1, point2, point3],
-            geodesic: false,
-            strokeColor: color,
-            strokeOpacity: 1.0,
-            strokeWeight: weight
-        });
-        latitudes.push(longLine);
-        longLine.setMap(map);
-    } 
+function paintSwitzerland(data){
+    var parsed = JSON.parse(JSON.parse(data));
+    console.log(parsed.Name);
+    console.log(parsed.Path);
+
+    const switzerland = new google.maps.Polygon({
+        paths: parsed.Path,
+        strokeColor: "#FF0000",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#FF0000",
+        fillOpacity: 0.35
+      });
+      switzerland.setMap(map);
 }

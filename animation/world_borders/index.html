@@ -1,47 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>KML Click Capture Sample</title>
-    <style>
-      html, body {
-        height: 370px;
-        padding: 0;
-        margin: 0;
-        }
-      #map {
-       height: 360px;
-       width: 300px;
-       overflow: hidden;
-       float: left;
-       border: thin solid #333;
-       }
-
-    </style>
+    <title>Simple Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jur5_jPksqNH33Qz5CeqCih8xYS5tts&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script src="map.js"></script>
+    <meta charset="utf-8"/>
   </head>
   <body>
     <div id="map"></div>
-    <script>
-      var map;
-      var src = 'https://data.nasa.gov/api/geospatial/7zbq-j77a?method=export&format=KML';
-
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: new google.maps.LatLng(0, 0),
-          zoom: 2,
-          mapTypeId: 'terrain'
-        });
-
-        var kmlLayer = new google.maps.KmlLayer(src, {
-          suppressInfoWindows: true,
-          preserveViewport: false,
-          map: map
-        });
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jur5_jPksqNH33Qz5CeqCih8xYS5tts&callback=initMap">
-    </script>
   </body>
 </html>
