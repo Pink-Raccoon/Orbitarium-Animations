@@ -103,7 +103,7 @@ function applyUpdate(mapUpdates){
         }
         // console.log("before:");
         // console.log(polygonObject);
-        polygonObject.setOptions({strokeColor: polygonUpdates.StrokeColor, fillColor: polygonUpdates.FillColor});
+        polygonObject.setOptions({strokeColor: polygonUpdates.StrokeColor, fillColor: polygonUpdates.FillColor, fillOpacity: polygonUpdates.FillOpacity});
         
         
         // console.log("after:");
