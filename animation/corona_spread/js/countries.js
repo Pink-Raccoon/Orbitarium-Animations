@@ -11,9 +11,9 @@ async function getAnimationInit(){
         },
         body: JSON.stringify("get_init,corona_spread")
     })
-    .then(response => response.text())
-            .then(data => parseData(data))
-            .catch(error => console.log("error:" + error));
+        .then(response => response.text())
+        .then(data => parseData(data))
+        .catch(error => console.log("error:" + error));
 }
 
 function parseData(serialized){
@@ -38,9 +38,6 @@ function generatePolygons(mapsObjects){
             console.log(key);
         }); 
         polygons[name] = polygon;
-        // var obj = {Name: name, value : polygon};
-        // polygons.push(obj);
-               
         polygon.setMap(map);
     });
     console.log("finished painting!")
@@ -57,9 +54,9 @@ async function runAnimation(){
         },
         body: JSON.stringify("start,corona_spread")
     })
-    .then(response => response.text())
-            .then(data => getUpdates())
-            .catch(error => console.log("error:" + error));
+        .then(response => response.text())
+        .then(data => getUpdates())
+        .catch(error => console.log("error:" + error));
 }
 
 async function getUpdates(){
@@ -72,9 +69,9 @@ async function getUpdates(){
         },
         body: JSON.stringify("get_update,corona_spread")
     })
-    .then(response => response.text())
-            .then(data => parseUpdates(data))
-            .catch(error => console.log("error:" + error));
+        .then(response => response.text())
+        .then(data => parseUpdates(data))
+        .catch(error => console.log("error:" + error));
 
 }
 
@@ -84,33 +81,49 @@ function parseUpdates(data){
     }
     var parsed = JSON.parse(JSON.parse(data));
     if(parsed != "noop"){
-        //console.log(parsed);
+        applyUpdate(parsed);
     }
-    applyUpdate(parsed);
     getUpdates();
 }
+
 function applyUpdate(mapUpdates){
+    console.log(mapUpdates.TimeStamp);
     var updates = mapUpdates.Updates;
     Object.keys(updates).forEach(function(key) {
         var name = key;
         //console.log(key);
-        //console.log(updates);
         var polygonUpdates = updates[key];
         
         
         var polygonObject = polygons[key];
-        //console.log(polygonObject);
-        //console.log(polygonUpdates);
-        polygonObject.strokeColor = polygonUpdates.StrokeColor;
-        polygonObject.fillColor = polygonUpdates.FillColor;
+        // console.log("before:");
+        // console.log(polygonObject);
+        polygonObject.setOptions({strokeColor: polygonUpdates.StrokeColor, fillColor: polygonUpdates.FillColor});
         
-        
+        // console.log("after:");
+        // console.log(polygonObject);
+        // console.log("in structure");
+        // console.log(polygons["Switzerland"]);
 
-        //polygons[name] = polygon;
-        // var obj = {Name: name, value : polygon};
-        // polygons.push(obj);
-               
-        //polygon.setMap(map);
     });
+    //clearObjects();
+}
 
+function drawInfo(){
+    var position = { lat: 0.0, lng: 0.0 };
+}
+
+function clearObjects(){
+    Object.keys(polygons).forEach(function(key) {
+        console.log("key is: " + key);
+        polygons[key].setMap(null);
+    });
+    //redrawObjects();
+}
+
+function redrawObjects(){
+    Object.keys(polygons).forEach(function(key) {
+        console.log("key is: " + key);
+        polygons[key].setMap(map);
+    });
 }
