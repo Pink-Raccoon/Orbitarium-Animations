@@ -100,7 +100,7 @@ function applyUpdate(mapUpdates){
 
         // console.log("before:");
         // console.log(polygonObject);
-        polygonObject.setOptions({strokeColor: polygonUpdate.StrokeColor, fillColor: polygonUpdate.FillColor, fillOpacity: polygonUpdates.FillOpacity});
+        polygonObject.setOptions({strokeColor: polygonUpdate.StrokeColor, fillColor: polygonUpdate.FillColor, fillOpacity: polygonUpdate.FillOpacity});
         // console.log("country: " + name);
         // console.log("getMap: " + polygonObject.getMap());
         // console.log("paint value: " + polygonUpdate.Paint);
