@@ -39,7 +39,7 @@ function generatePolygons(mapsObjects){
         });
         
         polygons[name] = polygon;
-        if(polygonOptions.StrokeColor != "#8cdc37") {
+        if(polygonOptions.Paint == true) {
             polygon.setMap(map);
         }
     });
@@ -95,16 +95,28 @@ function applyUpdate(mapUpdates){
     Object.keys(updates).forEach(function(key) {
         var name = key;
         //console.log(key);
-        var polygonUpdates = updates[key];
+        var polygonUpdate = updates[key];
         var polygonObject = polygons[key];
 
-        if(polygonUpdates.StrokeColor == "#ff0000" && polygonObject.strokeColor == "#8cdc37"){
-            polygonObject.setMap(map);
-        }
         // console.log("before:");
         // console.log(polygonObject);
-        polygonObject.setOptions({strokeColor: polygonUpdates.StrokeColor, fillColor: polygonUpdates.FillColor, fillOpacity: polygonUpdates.FillOpacity});
-        
+        polygonObject.setOptions({strokeColor: polygonUpdate.StrokeColor, fillColor: polygonUpdate.FillColor, fillOpacity: polygonUpdates.FillOpacity});
+        // console.log("country: " + name);
+        // console.log("getMap: " + polygonObject.getMap());
+        // console.log("paint value: " + polygonUpdate.Paint);
+        var getMap = polygonObject.getMap();
+        if(getMap === undefined){
+            var paint = polygonUpdate.Paint;
+            var a = typeof(paint);
+            var b = 1;
+            if(paint === true){
+                polygonObject.setMap(map);
+                var c = 2;
+            }
+        }
+        if(getMap === undefined && polygonUpdate.Paint == true){
+            polygonObject.setMap(map);
+        }
         
         // console.log("after:");
         // console.log(polygonObject);
