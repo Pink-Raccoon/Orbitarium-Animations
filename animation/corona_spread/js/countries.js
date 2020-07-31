@@ -36,9 +36,12 @@ function generatePolygons(mapsObjects){
         });
         polygon.addListener("click", () => {
             console.log(key);
-        }); 
+        });
+        
         polygons[name] = polygon;
-        polygon.setMap(map);
+        if(polygonOptions.StrokeColor != "#8cdc37") {
+            polygon.setMap(map);
+        }
     });
     console.log("finished painting!")
 }
@@ -93,12 +96,15 @@ function applyUpdate(mapUpdates){
         var name = key;
         //console.log(key);
         var polygonUpdates = updates[key];
-        
-        
         var polygonObject = polygons[key];
+
+        if(polygonUpdates.StrokeColor == "#ff0000" && polygonObject.strokeColor == "#8cdc37"){
+            polygonObject.setMap(map);
+        }
         // console.log("before:");
         // console.log(polygonObject);
         polygonObject.setOptions({strokeColor: polygonUpdates.StrokeColor, fillColor: polygonUpdates.FillColor});
+        
         
         // console.log("after:");
         // console.log(polygonObject);
