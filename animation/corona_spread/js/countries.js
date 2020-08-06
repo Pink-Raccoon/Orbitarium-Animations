@@ -1,7 +1,26 @@
 var polygons = new Object();
 var run = 1;
-
+var latlng;
+var infoWindow1;
+var infoWindow2;
+var infoWindow3;
 async function getAnimationInit(){
+
+    var infoWindow1 = new google.maps.InfoWindow({
+        content: "blabla"
+      });
+      infoWindow1.setPosition({lat: -5, lng: -25});
+    
+      var infoWindow2 = new google.maps.InfoWindow({
+        content: "left"
+      });
+      infoWindow2.setPosition({lat: -5, lng: -120});
+
+      var infoWindow3 = new google.maps.InfoWindow({
+        content: "right"
+      });
+      infoWindow3.setPosition({lat: -5, lng: 80});
+    
     let url = "http://localhost:50330/api/animation";
     const response = await fetch(url,{
         method: 'POST',
@@ -91,6 +110,7 @@ function parseUpdates(data){
 
 function applyUpdate(mapUpdates){
     console.log(mapUpdates.TimeStamp);
+    
     var updates = mapUpdates.Updates;
     Object.keys(updates).forEach(function(key) {
         var name = key;

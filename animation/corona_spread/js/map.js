@@ -9,8 +9,9 @@ function initMap() {
         center: { lat: 0, lng: 0 },
         zoom: 3.0768155970508308922315362613328397021
     });
+    //initDateField();
     console.log(getAnimationInit());
     //var polygon = drawPolyLine("asd");
     //polygon.setMap(map);   
-    //readCoronaData();
+    //readCoronaData();    
 }
