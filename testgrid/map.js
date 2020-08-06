@@ -3,10 +3,10 @@ var latitudes = [];
 var longitudes = [];
 
 function initMap() {
-  //zoom level must be at 3.485 for a render screen of 2000x2000 pixels (web mercator is a square!)
+  //zoom level must be at 3.0768155970508308922315362613328397021 for a render screen of 2160x2160 pixels (web mercator is a square!)
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 0, lng: 0 },
-    zoom: 3.485
+    zoom: 3.0768155970508308922315362613328397021
   });
   generateLatitudeLines();
   generateLongitudeLines();
