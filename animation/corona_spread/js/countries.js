@@ -6,17 +6,17 @@ var infoWindow2;
 var infoWindow3;
 async function getAnimationInit(){
 
-    var infoWindow1 = new google.maps.InfoWindow({
+    infoWindow1 = new google.maps.InfoWindow({
         content: "blabla"
       });
       infoWindow1.setPosition({lat: -5, lng: -25});
     
-      var infoWindow2 = new google.maps.InfoWindow({
+    infoWindow2 = new google.maps.InfoWindow({
         content: "left"
       });
       infoWindow2.setPosition({lat: -5, lng: -120});
 
-      var infoWindow3 = new google.maps.InfoWindow({
+    infoWindow3 = new google.maps.InfoWindow({
         content: "right"
       });
       infoWindow3.setPosition({lat: -5, lng: 80});
@@ -111,6 +111,14 @@ function parseUpdates(data){
 function applyUpdate(mapUpdates){
     console.log(mapUpdates.TimeStamp);
     
+    infoWindow1.setContent(mapUpdates.TimeStamp)
+    infoWindow1.open(map);
+    infoWindow2.setContent(mapUpdates.TimeStamp)
+    infoWindow2.open(map);
+    infoWindow3.setContent(mapUpdates.TimeStamp)
+    infoWindow3.open(map);
+
+
     var updates = mapUpdates.Updates;
     Object.keys(updates).forEach(function(key) {
         var name = key;
