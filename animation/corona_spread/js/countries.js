@@ -21,7 +21,7 @@ async function getAnimationInit(){
       });
       infoWindow3.setPosition({lat: -5, lng: 80});
     
-    let url = "http://localhost:50330/api/animation";
+    let url = "http://localhost:12345/api/animation";
     const response = await fetch(url,{
         method: 'POST',
         cache: 'no-cache',
@@ -67,7 +67,7 @@ function generatePolygons(mapsObjects){
 
 async function runAnimation(){
     console.log("running animation..")
-    let url = "http://localhost:50330/api/animation";
+    let url = "http://localhost:12345/api/animation";
     const response = await fetch(url,{
         method: 'POST',
         cache: 'no-cache',
@@ -82,7 +82,7 @@ async function runAnimation(){
 }
 
 async function getUpdates(){
-    let url = "http://localhost:50330/api/animation";
+    let url = "http://localhost:12345/api/animation";
     const response = await fetch(url,{
         method: 'POST',
         cache: 'no-cache',
