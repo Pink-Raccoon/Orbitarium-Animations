@@ -1,0 +1,64 @@
+<html>
+    <head>		
+		<script src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jur5_jPksqNH33Qz5CeqCih8xYS5tts&callback=initMap" 
+		defer></script>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<link type="text/css" rel="stylesheet" href="gmap.css" />
+		<script>
+    var map;
+    var cta_layer;
+	var gxml; 
+    function initMap() { 
+		console.log("hello");
+        var myOptions = {
+            mapTypeId: google.maps.MapTypeId.SATELLITE,
+			zoom: 3.0768155970508308922315362613328397021,
+			center: new google.maps.LatLng(0,0)
+			}
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+		
+	 
+		var url = "https://radar.zhaw.ch/~rege/docs/bluemarble.kml";
+		/*gxml = new GeoXml("gxml", map, url, {
+			sidebarid:"the_side_bar",
+			publishdirectory:"http://www.dyasdesigns.com/tntmap/",
+			allfoldersopen:true,
+			maxVisibleMarkers:400,
+			iwwidth:180
+		});  
+		gxml.parse("gaza");*/
+		var kmlLayer = new google.maps.KmlLayer(url, {
+          suppressInfoWindows: true,
+          preserveViewport: true,
+          map: map
+        });
+        kmlLayer.addListener('click', function(event) {
+          var content = event.featureData.infoWindowHtml;
+          var testimonial = document.getElementById('map_canvas');
+          testimonial.innerHTML = content;
+        });
+
+    }
+        </script>
+		<style>
+      #map_canvas {
+		height: 100%;
+	  }
+  
+		/* Optional: Makes the sample page fill the window. */
+		html,
+	body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+    </style>
+    </head>
+    <body>
+		
+        <div id="map-container">
+		
+			<div id="map_canvas"></div>
+		</div>
+    </body>
+</html>
