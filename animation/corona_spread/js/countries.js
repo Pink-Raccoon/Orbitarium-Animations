@@ -4,6 +4,7 @@ var latlng;
 var infoWindow1;
 var infoWindow2;
 var infoWindow3;
+var animation;
 async function getAnimationInit(){
 
     infoWindow1 = new google.maps.InfoWindow({
@@ -21,6 +22,11 @@ async function getAnimationInit(){
       });
       infoWindow3.setPosition({lat: -5, lng: 80});
     
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    console.log(urlParams.get('animation'));
+    animation = urlParams.get('animation');
+
     let url = "http://localhost:12345/api/animation";
     const response = await fetch(url,{
         method: 'POST',
@@ -28,7 +34,7 @@ async function getAnimationInit(){
         headers : {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify("get_init,corona_spread")
+        body: JSON.stringify("get_init," + animation)
     })
         .then(response => response.text())
         .then(data => parseData(data))
@@ -66,7 +72,7 @@ function generatePolygons(mapsObjects){
 }
 
 async function runAnimation(){
-    console.log("running animation..")
+    console.log("running animation..");
     let url = "http://localhost:12345/api/animation";
     const response = await fetch(url,{
         method: 'POST',
@@ -74,7 +80,7 @@ async function runAnimation(){
         headers : {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify("start,corona_spread")
+        body: JSON.stringify("start," + animation)
     })
         .then(response => response.text())
         .then(data => getUpdates())
@@ -89,7 +95,7 @@ async function getUpdates(){
         headers : {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify("get_update,corona_spread")
+        body: JSON.stringify("get_update," + animation)
     })
         .then(response => response.text())
         .then(data => parseUpdates(data))
